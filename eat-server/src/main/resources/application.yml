@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: eat-server
+  profiles:
+    active: dev
+
+  datasource:
+    url: ${MYSQL_URL:jdbc:mysql://localhost:3306/eat_db?useUnicode=true&characterEncoding=utf8mb4&serverTimezone=Asia/Shanghai}
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: 3000ms
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: isDeleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+server:
+  port: 8080
+
+# ========== 业务配置 ==========
+eat:
+  jwt:
+    secret: ${JWT_SECRET:}
+    expiration: 604800000  # 7天(ms)
+
+  ai:
+    primary:
+      url: ${AI_API_URL:https://dashscope.aliyuncs.com/compatible-mode/v1}
+      key: ${AI_API_KEY:}
+      model: ${AI_MODEL:qwen-plus}
+    fallback:
+      url: ${AI_FALLBACK_URL:https://api.deepseek.com/v1}
+      key: ${AI_FALLBACK_KEY:}
+      model: ${AI_FALLBACK_MODEL:deepseek-chat}
+    timeout:
+      connect: 5000
+      read: 15000
+    retry:
+      max-retries: 1
+      retry-delay: 1000
+
+  sms:
+    provider: ${SMS_PROVIDER:aliyun}
+    access-key: ${SMS_ACCESS_KEY:}
+    secret-key: ${SMS_SECRET_KEY:}
+    template-code: ${SMS_TEMPLATE_CODE:}
+
+  rate-limit:
+    meal-per-minute: 5
+    qa-per-minute: 10
+    sms-per-minute: 1
+    meal-daily: 20
+    qa-daily: 30

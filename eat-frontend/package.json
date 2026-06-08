@@ -1,0 +1,23 @@
+{
+  "name": "eat-frontend",
+  "version": "0.0.1",
+  "private": true,
+  "description": "吃了吗 - AI饮食决策前端 (Vue3 H5)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.4.0",
+    "vue-router": "^4.3.0",
+    "pinia": "^2.1.0",
+    "axios": "^1.7.0",
+    "vant": "^4.9.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "vite": "^5.4.0",
+    "unplugin-vue-components": "^0.27.0"
+  }
+}
